@@ -7,7 +7,7 @@ export const BookingPage: React.FC = () => {
   const defaultSlotId = searchParams.get('slotId') || '';
   const navigate = useNavigate();
   const addBooking = useStore(state => state.addBooking);
-  
+
   const [formData, setFormData] = useState({
     name: '',
     vehicleNumber: '',
@@ -18,7 +18,7 @@ export const BookingPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const newId = `BKG-${Date.now().toString().slice(-6)}`;
-    
+
     addBooking({
       id: newId,
       name: formData.name,
@@ -28,14 +28,14 @@ export const BookingPage: React.FC = () => {
       duration: Number(formData.duration),
       isActive: true,
     });
-    
+
     navigate(`/booking/${newId}`);
   };
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
       <div className="glass-panel w-full max-w-md p-8">
-        <button 
+        <button
           onClick={() => navigate('/')}
           className="text-slate-400 hover:text-slate-600 font-medium text-sm mb-6 flex items-center transition-colors"
         >
@@ -48,12 +48,12 @@ export const BookingPage: React.FC = () => {
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="label-text">Slot Selection</label>
-            <input 
-              type="text" 
+            <input
+              type="text"
               required
               readOnly={!!defaultSlotId}
               value={formData.slotId}
-              onChange={(e) => setFormData({...formData, slotId: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, slotId: e.target.value })}
               className={`input-field font-mono font-bold ${defaultSlotId ? 'bg-slate-100 text-slate-500' : ''}`}
               placeholder="e.g. A1"
             />
@@ -61,33 +61,33 @@ export const BookingPage: React.FC = () => {
 
           <div>
             <label className="label-text">Full Name</label>
-            <input 
-              type="text" 
+            <input
+              type="text"
               required
               value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
-              className="input-field" 
-              placeholder="John Doe"
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              className="input-field"
+              placeholder="Your Name Please"
             />
           </div>
 
           <div>
             <label className="label-text">Vehicle Registration Number</label>
-            <input 
-              type="text" 
+            <input
+              type="text"
               required
               value={formData.vehicleNumber}
-              onChange={(e) => setFormData({...formData, vehicleNumber: e.target.value.toUpperCase()})}
-              className="input-field font-mono uppercase" 
+              onChange={(e) => setFormData({ ...formData, vehicleNumber: e.target.value.toUpperCase() })}
+              className="input-field font-mono uppercase"
               placeholder="XYZ 1234"
             />
           </div>
 
           <div>
             <label className="label-text">Duration (Minutes)</label>
-            <select 
+            <select
               value={formData.duration}
-              onChange={(e) => setFormData({...formData, duration: Number(e.target.value)})}
+              onChange={(e) => setFormData({ ...formData, duration: Number(e.target.value) })}
               className="input-field bg-white"
             >
               <option value={30}>30 Minutes</option>
